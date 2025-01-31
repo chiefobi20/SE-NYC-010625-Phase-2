@@ -1,6 +1,7 @@
 import { useState } from "react";
+import pets from "../data/pets";
 
-function Pet({pet}){
+function Pet({pet, deletePet, isDarkMode, updatePet}){
 
     const [displayAnimalType, setDisplayAnimalType] = useState(false)
 
@@ -8,12 +9,16 @@ function Pet({pet}){
         setDisplayAnimalType(!displayAnimalType)
     }
 
+
+    const darkModeClass = isDarkMode ? "dark-mode" : ""
+
     return (
-        <li className="pet">
+        <li className={`pet ${darkModeClass}`}>
             <img src={pet.image} alt={pet.name}/>
             <h4 onClick={toggleDisplayAnimalType} className={displayAnimalType ? "display-animal-type" : ""}>{displayAnimalType ? pet.animal_type : pet.name}</h4>
-            <button className="like-button">{/* pet's likes goes here */} Likes</button>
-            <button className="adopt-button">Adopt</button>
+            <button onClick={() => updatePet({...pet, likes: pets.likes + 1})} className="like-button">{pet.likes} Likes</button>
+            <button onClick={() => deletePet(pet.id)} className="adopt-button">Adopt</button>
+
         </li>
     );
 }
