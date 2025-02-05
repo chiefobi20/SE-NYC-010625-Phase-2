@@ -23,7 +23,15 @@ function NewPetForm({addPet}) {
     }
 
     addPet(newPet)
-    
+
+    fetch("http://localhost:4000/pets", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify()
+    })
+
     setFormData({
       name: "",
       image: "",
@@ -43,5 +51,5 @@ function NewPetForm({addPet}) {
     </div>
   );
 }
-  
+
   export default NewPetForm;
